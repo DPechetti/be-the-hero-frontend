@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi'
+import { Link, useHistory } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import './styles.css';
 
@@ -10,9 +10,11 @@ import api from '../../services/api';
 function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [whastapp, setWhatsapp] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
+
+  const history = useHistory();
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -20,16 +22,17 @@ function Register() {
     const data = {
       name,
       email,
-      whastapp,
+      whatsapp,
       city,
       uf,
     };
 
     try{
-      console.log(data);
       const response = await api.post('/ongs', data);
 
       alert(`Seu ID de acesso: ${response.data.id}`);
+
+      history.push('/');
     } catch(err){
       console.log(err);
       alert('Erro no cadastro, tente novamente.');
@@ -67,7 +70,7 @@ function Register() {
           
           <input 
             placeholder="WhatsApp" 
-            value={whastapp}
+            value={whatsapp}
             onChange={e => setWhatsapp(e.target.value)}
           />
 
