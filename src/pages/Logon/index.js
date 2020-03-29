@@ -23,7 +23,6 @@ function Logon() {
 
       history.push('/profile');
     } catch (err) {
-      console.log(err);
       alert('Falha no login, tente novamente.');
     }
   }
